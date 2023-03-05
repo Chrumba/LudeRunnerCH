@@ -15,7 +15,7 @@ namespace LudeRunnerCH
 
 
 
-        public const int intend = 4;
+        public const int intend = 1;
 
         public const ConsoleColor WallColor = ConsoleColor.Yellow;
         public const ConsoleColor LaderColor = ConsoleColor.Blue;
@@ -26,10 +26,10 @@ namespace LudeRunnerCH
         static void Main(string[] args)
         {
             SetWindowSize(WindowWIDTH, WindowHEIGHT);
-            //SetBufferSize(WindowWIDTH, WindowHEIGHT);
+            SetBufferSize(WindowWIDTH, WindowHEIGHT);
             CursorVisible = false;
 
-            Map.Generator.ConsoleSides();
+            Map.Generator.ConsoleSides(WIDTH + intend + 1, HEIGHT + intend + 1);
 
 
             int[,] map = Map.Generator.IntMapGenerator(WIDTH, HEIGHT);
