@@ -1,0 +1,15 @@
+C:\Users\Denis\Desktop\LudeRunnerCH\bin\Debug\net7.0\LudeRunnerCH.exe
+C:\Users\Denis\Desktop\LudeRunnerCH\bin\Debug\net7.0\LudeRunnerCH.deps.json
+C:\Users\Denis\Desktop\LudeRunnerCH\bin\Debug\net7.0\LudeRunnerCH.runtimeconfig.json
+C:\Users\Denis\Desktop\LudeRunnerCH\bin\Debug\net7.0\LudeRunnerCH.dll
+C:\Users\Denis\Desktop\LudeRunnerCH\bin\Debug\net7.0\LudeRunnerCH.pdb
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\LudeRunnerCH.csproj.AssemblyReference.cache
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\LudeRunnerCH.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\LudeRunnerCH.AssemblyInfoInputs.cache
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\LudeRunnerCH.AssemblyInfo.cs
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\LudeRunnerCH.csproj.CoreCompileInputs.cache
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\LudeRunnerCH.dll
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\refint\LudeRunnerCH.dll
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\LudeRunnerCH.pdb
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\LudeRunnerCH.genruntimeconfig.cache
+C:\Users\Denis\Desktop\LudeRunnerCH\obj\Debug\net7.0\ref\LudeRunnerCH.dll
