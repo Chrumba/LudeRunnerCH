@@ -26,8 +26,11 @@ namespace LudeRunnerCH
         static void Main(string[] args)
         {
             SetWindowSize(WindowWIDTH, WindowHEIGHT);
-            SetBufferSize(WindowWIDTH, WindowHEIGHT);
+            //SetBufferSize(WindowWIDTH, WindowHEIGHT);
             CursorVisible = false;
+
+            Map.Generator.ConsoleSides();
+
 
             int[,] map = Map.Generator.IntMapGenerator(WIDTH, HEIGHT);
             int[,] EntityMap = new int[WIDTH, HEIGHT];

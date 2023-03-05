@@ -71,5 +71,28 @@ namespace LudeRunnerCH.Map
             return map;
         }
 
+        public static void ConsoleSides(int width = game.WindowWIDTH, int height = game.WindowHEIGHT, ConsoleColor color = ConsoleColor.DarkGray)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Console.ForegroundColor = color;
+                Console.SetCursorPosition(0, y);
+                Console.Write('█');
+                Console.SetCursorPosition(width-1, y);
+                Console.Write('█');
+            }
+            
+            for (int x = 1; x < width; x++)
+            {
+                Console.ForegroundColor = color;
+                Console.SetCursorPosition(x, 0);
+                Console.Write('█');
+                Console.SetCursorPosition(x, height-1);
+                Console.Write('█');
+            }
+
+        }
+
+
     }
 }
