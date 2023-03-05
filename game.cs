@@ -42,7 +42,7 @@ namespace LudeRunnerCH
             EntityMap[x, y] = PlayerSturct.IntModel;
 
             
-            new Map.Entity.PlayerSturct(x + intend, y + intend, PlayerColor).Draw();
+            new PlayerSturct(x + intend, y + intend, PlayerColor).Draw();
 
             while(true)
             {
@@ -92,7 +92,7 @@ namespace LudeRunnerCH
 
                 Map.Generator.CharRender(EntityMap, intend, intend);
             }
-            Console.ReadKey();
+            
         }
 
     }
