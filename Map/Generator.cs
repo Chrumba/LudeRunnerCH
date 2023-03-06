@@ -75,20 +75,14 @@ namespace LudeRunnerCH.Map
         {
             for (int y = 0; y < height; y++)
             {
-                Console.ForegroundColor = color;
-                Console.SetCursorPosition(0, y);
-                Console.Write('█');
-                Console.SetCursorPosition(width-1, y);
-                Console.Write('█');
+                new GUI.Pixel(0, y, color).Draw();
+                new GUI.Pixel(width - 1, y, color).Draw();
             }
             
             for (int x = 1; x < width; x++)
             {
-                Console.ForegroundColor = color;
-                Console.SetCursorPosition(x, 0);
-                Console.Write('█');
-                Console.SetCursorPosition(x, height-1);
-                Console.Write('█');
+                new GUI.Pixel(x, 0, color).Draw();
+                new GUI.Pixel(x, height-1, color).Draw();
             }
 
         }

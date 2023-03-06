@@ -10,10 +10,7 @@ namespace LudeRunnerCH
         public const int HEIGHT = 30;
         
         public const int WindowWIDTH = 70;
-        public const int WindowHEIGHT = 40;
-
-
-
+        public const int WindowHEIGHT = 50;
 
         public const int intend = 1;
 
@@ -21,7 +18,10 @@ namespace LudeRunnerCH
         public const ConsoleColor LaderColor = ConsoleColor.Blue;
         public const ConsoleColor PlayerColor = ConsoleColor.Green;
 
+        public void InitMap()
+        {
 
+        }
 
         static void Main(string[] args)
         {
@@ -36,6 +36,15 @@ namespace LudeRunnerCH
             int[,] EntityMap = new int[WIDTH, HEIGHT];
             Array.Copy(map, EntityMap, map.Length);
             Map.Generator.CharRender(map, intend , intend);
+
+
+            GameLogic.Player.Inventory.PInventory inven = new GameLogic.Player.Inventory.PInventory() { CountItems = 6, MaxStack = 3};
+
+            int[] invetory = inven.PILInit();
+            
+
+            GUI.GUIinventory.RenderGUI(inven, 0, HEIGHT+2, 8,5, 2, ConsoleColor.Cyan);
+
 
 
             int x = 2;
