@@ -1,6 +1,8 @@
-﻿using System;
+﻿using LudeRunnerCH.GameLogic.Player.Inventory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,9 +10,28 @@ namespace LudeRunnerCH.GUI
 {
     public class GUIinventory
     {
-        public static void RenderGUI(GameLogic.Player.Inventory.PInventory inventory, int start_x, int start_y, int cell_width, int cell_height, int intend, ConsoleColor Frame_color)
-        {
 
+        public GameLogic.Player.Inventory.PInventory inventory { get; set; }
+        public int start_x { get; set; }
+        public int start_y {  get; set; }
+        public int cell_width { get; set; }
+        public int cell_height { get; set; }
+        public int intend { get; set; }
+        public ConsoleColor Frame_color { get; set; }
+
+        public GUIinventory(PInventory inventory, int start_x, int start_y, int cell_width, int cell_height, int intend, ConsoleColor frame_color)
+        {
+            this.inventory = inventory;
+            this.start_x = start_x;
+            this.start_y = start_y;
+            this.cell_width = cell_width;
+            this.cell_height = cell_height;
+            this.intend = intend;
+            Frame_color = frame_color;
+        }
+
+        public  void RenderGUI()
+        {
             int count = inventory.CountItems;
 
             for (int i = start_x; i <= count*(start_x+cell_width); i += cell_width+intend)
@@ -27,9 +48,32 @@ namespace LudeRunnerCH.GUI
                     new Pixel(i+start_x, y, Frame_color).Draw();
                     new Pixel(i+cell_width+start_x, y, Frame_color).Draw();
                 }
-
-                
             }
         }
+        
+        public  Utils.Vector[] GetVectorsGUISlots()
+        {
+            int count = inventory.CountItems;
+            Utils.Vector[] result = new Utils.Vector[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                result[i] = new Utils.Vector(start_x + 2, start_y + 2);
+            }
+
+            for (int i = start_x; i <= count * (start_x + cell_width); i += cell_width + intend)
+            {
+
+                for (int y = start_y; y < cell_height + start_y; y++)
+                {
+                    
+                }
+            }
+
+            return result;
+
+        }
+
+
     }
 }
