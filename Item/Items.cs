@@ -9,24 +9,8 @@ namespace LudeRunnerCH.Item
 {
     public class Items
     {
-        public class PickUps: PIItem
+        public class PickUps
         {
-            public PIItem Coin()
-            {
-                PIItem coin = new PIItem()
-                {
-                    count = 0,
-                    ItemID= 0, 
-                    Description = " Одна гривня",
-                    Model = '@',
-                    Name = "Гривня",
-                    MaxStack = 99,
-                };
-                return coin;
-            }
-
-
-
 
 
         }

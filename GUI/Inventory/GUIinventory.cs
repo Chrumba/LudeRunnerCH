@@ -16,7 +16,7 @@ namespace LudeRunnerCH.GUI
         public int start_y {  get; set; }
         public int cell_width { get; set; }
         public int cell_height { get; set; }
-        public int intend { get; set; }
+        private int intend { get; set; }
         public ConsoleColor Frame_color { get; set; }
 
         public GUIinventory(PInventory inventory, int start_x, int start_y, int cell_width, int cell_height, int intend, ConsoleColor frame_color)
@@ -30,8 +30,14 @@ namespace LudeRunnerCH.GUI
             Frame_color = frame_color;
         }
 
+
+
+
         public  void RenderGUI() //Render the gui in console with set parameters 
         {
+
+
+
             int count = inventory.CountItems;
 
             for (int i = 0; i < (count-1)*(start_x+cell_width); i += cell_width+intend)

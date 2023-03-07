@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LudeRunnerCH.Item.ItemLogic
 {
-    public class Logic : GameLogic.Player.Inventory.PIItem
+    public class GUIRender : GameLogic.Player.Inventory.PIItem
     {
-        public void Render()
+        public void Render(int width, int height)
         {
 
 
