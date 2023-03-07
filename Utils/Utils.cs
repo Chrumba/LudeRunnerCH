@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LudeRunnerCH.Utils
 {
-    public class Vector
+    public struct Vector
     {
         public int x { get; set; } 
         public int y { get; set; }
@@ -16,18 +16,6 @@ namespace LudeRunnerCH.Utils
             this.x = x;
             this.y = y;
         }
-
-        public int getX(int x )
-        {
-            return this.x;
-        }
-
-
-        public int getY(int y ) 
-        {
-            return this.y;
-        }
-
 
     }
 }

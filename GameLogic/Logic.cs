@@ -9,7 +9,7 @@ namespace LudeRunnerCH
 {
     public class EntityLogic
     {
-        public static bool Colission(int[,] IntMap, int IdOfObject,int x, int y)
+        public static bool Colission(int[,] IntMap, int IdOfObject,int x, int y) // Return the bool meaning, when objects have colission 
         {
             if (IntMap[x,y]!=IdOfObject)
             {
@@ -17,9 +17,9 @@ namespace LudeRunnerCH
             }
             return false;
         }
-        public static bool Colission(int[,] IntMap, int x, int y)
+        public static bool Colission(int[,] IntMap, int x, int y)  // Return the bool meaning, when objects have colission with any object
         {
-            if (IntMap[x,y]!=0)
+            if (IntMap[x,y] != Map.Nothing.IntModel)
             {
                 return true;
             }

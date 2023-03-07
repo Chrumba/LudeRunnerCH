@@ -38,14 +38,19 @@ namespace LudeRunnerCH
             Map.Generator.CharRender(map, intend , intend);
 
 
-            GameLogic.Player.Inventory.PInventory inven = new GameLogic.Player.Inventory.PInventory() { CountItems = 4, MaxStack = 3};
-
-            int[] invetory = inven.PILInit();
+            GameLogic.Player.Inventory.PInventory inven = new GameLogic.Player.Inventory.PInventory() { CountItems = 4 };
 
 
-            GUI.GUIinventory GUI = new GUI.GUIinventory(inven, 3, HEIGHT + 3, 8, 5, 2, ConsoleColor.DarkGray);
+            int IvnventoryIntend = 2;
+            int SlotWidth = 5;
+            int SlotHeight = 8;
+
+
+            GUI.GUIinventory GUI = new GUI.GUIinventory(inven, 3, HEIGHT + 3, SlotHeight, SlotWidth, IvnventoryIntend, ConsoleColor.DarkGray);
+            
+            
             GUI.RenderGUI();
-
+            GUI.GetVectorsGUISlots();
             
 
             int x = 2;

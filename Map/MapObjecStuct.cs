@@ -67,28 +67,28 @@ namespace LudeRunnerCH.Map
             Console.SetCursorPosition(X, Y);
             Console.Write(' ');
         }
-        public readonly struct Nothing
-        {
-            private const char WallChar = ' ';
-            public const int IntModel = 0;
-
-            public int X { get; }
-            public int Y { get; }
-
-            public Nothing(int x, int y)
-            {
-                X = x;
-                Y = y;
-            }
-
-            public void Draw()
-            {
-                Console.SetCursorPosition(X, Y);
-                Console.Write(WallChar);
-
-            }
+        
 
         }
+    public readonly struct Nothing
+    {
+        private const char WallChar = ' ';
+        public const int IntModel = 0;
 
+        public int X { get; }
+        public int Y { get; }
+
+        public Nothing(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public void Draw()
+        {
+            Console.SetCursorPosition(X, Y);
+            Console.Write(WallChar);
+
+        }
     }
 }

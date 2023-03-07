@@ -30,11 +30,11 @@ namespace LudeRunnerCH.GUI
             Frame_color = frame_color;
         }
 
-        public  void RenderGUI()
+        public  void RenderGUI() //Render the gui in console with set parameters 
         {
             int count = inventory.CountItems;
 
-            for (int i = start_x; i <= count*(start_x+cell_width); i += cell_width+intend)
+            for (int i = 0; i < (count-1)*(start_x+cell_width); i += cell_width+intend)
             {
                 for (int x = start_x+i; x < cell_width+start_x+i; x++)
                 {
@@ -51,25 +51,18 @@ namespace LudeRunnerCH.GUI
             }
         }
         
-        public  Utils.Vector[] GetVectorsGUISlots()
+        public  Utils.Vector[] GetVectorsGUISlots() //Return x+1 y+1 slots 
         {
             int count = inventory.CountItems;
             Utils.Vector[] result = new Utils.Vector[count];
 
+            int temp = start_x+1;
+
             for (int i = 0; i < count; i++)
             {
-                result[i] = new Utils.Vector(start_x + 2, start_y + 2);
+                result[i] = new Utils.Vector(temp, start_y +1);
+                temp += cell_width + intend;
             }
-
-            for (int i = start_x; i <= count * (start_x + cell_width); i += cell_width + intend)
-            {
-
-                for (int y = start_y; y < cell_height + start_y; y++)
-                {
-                    
-                }
-            }
-
             return result;
 
         }
