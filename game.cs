@@ -29,57 +29,59 @@ namespace LudeRunnerCH
 
         static void Main(string[] args)
         {
+            //Console config
             SetWindowSize(WindowWIDTH, WindowHEIGHT);
             SetBufferSize(WindowWIDTH, WindowHEIGHT);
             CursorVisible = false;
             Generator.ConsoleSides(WIDTH + intend + 1, HEIGHT + intend + 1);
 
-
+            //Map layers init
             MapObjects[,] MapObjecstMap = Generator.GeneratorMap(WIDTH, HEIGHT);
             EntityObject[,] EntityMap2 = new EntityObject[WIDTH, HEIGHT];
             Dictionary<Vector, Item> ItemMap = new Dictionary<Vector, Item>();
 
-
-            Generator.RenderMap(MapObjecstMap, intend);
-
+            //inventory init
             PInventory inven = new PInventory() { CountItems = 4 };
+            Dictionary<int, Item> PlayerInventory = new Dictionary<int, Item>();
 
             int IvnventoryIntend = 2;
             int SlotWidth = 5;
-            int SlotHeight = 8;
-
-            
+            int SlotHeight = 7;
             GUI.GUIinventory GUIe = new GUI.GUIinventory(inven, 3, HEIGHT + 3, SlotHeight, SlotWidth, IvnventoryIntend, ConsoleColor.DarkGray);
             GUIe.RenderGUI();
-            GUIe.GetVectorsGUISlots();
+            Vector[] guiSlots = GUIe.GetVectorsGUISlots();
 
-
-            Item coin = new Item(id: 1, name: "Гривня", description: "", maxStack: 99, model: '@', color: ConsoleColor.DarkMagenta);
+            //items init
+            Item coin = new Item(id: 1, name: "Гривня", description: "", maxStack: 99, model: '@', color: ConsoleColor.DarkMagenta, count:0);
             coin.Render(new Vector(6+intend, 5 + intend));
+            ItemMap.Add(new Vector(6, 5), coin);
 
-
-            ItemMap.Add(new Vector(6 + intend, 5 + intend), coin);
-
-            int x, y;
-
+            
+            //Player init
             EntityObject player = new EntityObject(model: 'I', ConsoleColor.Green, name: "Игрок", id: 1, vector: new Vector(2,5));
-
             EntityMap2[2,5] = player;
-
             player.Draw(new Vector(2 + intend, 5 + intend));
+            PlayerInventory.Add(0, coin);
 
+
+            Generator.RenderMap(MapObjecstMap, intend);
+            int x, y;
             while (true)
             {
-                
+                //player manager
                 x = player.Vector.x ;
                 y = player.Vector.y ;
                 EntityMap2[x, y] = null;
-
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-
                 player.Clear(new Vector(x + intend, y + intend));
-                
 
+                //Coin add in a inventory 
+                if (ItemMap.ContainsKey(new Vector(x, y)))
+                {
+                    PlayerInventory[0] = coin.ChangeCount(coin.Count + 1);
+                }
+
+                //Player controll
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -100,10 +102,7 @@ namespace LudeRunnerCH
                                 MapObjecstMap[x, y].Draw(new Vector(x+intend, y+intend));
                                 y++;
                             }
-                            if (ItemMap[new Vector(x,y)] == coin)
-                            {
-
-                            }
+                            
                         }
                         break; 
                     case ConsoleKey.RightArrow:
@@ -113,6 +112,7 @@ namespace LudeRunnerCH
                             {
                                 MapObjecstMap[x, y].Draw(new Vector(x + intend, y + intend));
                             }
+                            
                             
                             x++;
                         }
@@ -129,7 +129,8 @@ namespace LudeRunnerCH
                         }
                         break;
                 };
-                
+
+                //Gravitation 
                 if (!EntityLogic.Colission(EntityMap2, MapObjecstMap, x, y + 1))
                 {
                     int yy = y;
@@ -138,8 +139,21 @@ namespace LudeRunnerCH
                         yy++;
                     }
                     y = yy;
-                }  
+                }
 
+                //Inventory render
+                for (int i = 0; i < guiSlots.Length; i++)
+                {
+                    if (PlayerInventory.ContainsKey(i))
+                    {
+                        ForegroundColor = ConsoleColor.White;
+                        SetCursorPosition(guiSlots[i].x, guiSlots[i].y);
+                        Write(PlayerInventory[i].Count);
+                        PlayerInventory[i].Render(new Vector(guiSlots[i].x+2, guiSlots[i].y+1));
+                    }
+                    
+                }
+                //Player render
                 EntityMap2[x, y] = player;
                 player.Draw(new Vector(x + intend,y + intend));
                 player.Vector = new Vector(x,y);
