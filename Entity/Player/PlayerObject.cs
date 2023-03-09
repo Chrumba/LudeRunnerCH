@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LudeRunnerCH.Map.Entity.Player
+namespace LudeRunnerCH.Entity.Player
 {
-    public class PlayerLogic
-    {
 
-    }
 }

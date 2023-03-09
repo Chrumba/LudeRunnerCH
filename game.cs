@@ -1,5 +1,9 @@
-﻿using LudeRunnerCH.Map.Entity;
+﻿using LudeRunnerCH.Entity;
+using LudeRunnerCH.Entity.Player.Inventory;
+using LudeRunnerCH.Map;
+using LudeRunnerCH.Map.Entity;
 using LudeRunnerCH.Map.MapLogic;
+using LudeRunnerCH.Utils;
 using static System.Console;
 namespace LudeRunnerCH
 {
@@ -28,91 +32,121 @@ namespace LudeRunnerCH
             SetWindowSize(WindowWIDTH, WindowHEIGHT);
             SetBufferSize(WindowWIDTH, WindowHEIGHT);
             CursorVisible = false;
-
-            Map.Generator.ConsoleSides(WIDTH + intend + 1, HEIGHT + intend + 1);
-
-
-            int[,] map = Map.Generator.IntMapGenerator(WIDTH, HEIGHT);
-            int[,] EntityMap = new int[WIDTH, HEIGHT];
-            Array.Copy(map, EntityMap, map.Length);
-            Map.Generator.CharRender(map, intend , intend);
+            Generator.ConsoleSides(WIDTH + intend + 1, HEIGHT + intend + 1);
 
 
-            GameLogic.Player.Inventory.PInventory inven = new GameLogic.Player.Inventory.PInventory() { CountItems = 4 };
+            MapObjects[,] MapObjecstMap = Generator.GeneratorMap(WIDTH, HEIGHT);
+            EntityObject[,] EntityMap2 = new EntityObject[WIDTH, HEIGHT];
+            Dictionary<Vector, Item> ItemMap = new Dictionary<Vector, Item>();
 
+
+            Generator.RenderMap(MapObjecstMap, intend);
+
+            PInventory inven = new PInventory() { CountItems = 4 };
 
             int IvnventoryIntend = 2;
             int SlotWidth = 5;
             int SlotHeight = 8;
 
-
-            GUI.GUIinventory GUI = new GUI.GUIinventory(inven, 3, HEIGHT + 3, SlotHeight, SlotWidth, IvnventoryIntend, ConsoleColor.DarkGray);
             
-            
+            GUI.GUIinventory GUIe = new GUI.GUIinventory(inven, 3, HEIGHT + 3, SlotHeight, SlotWidth, IvnventoryIntend, ConsoleColor.DarkGray);
+            GUIe.RenderGUI();
+            GUIe.GetVectorsGUISlots();
 
-            
-            GUI.RenderGUI();
-            GUI.GetVectorsGUISlots();
-            
 
-            int x = 2;
-            int y = 5;
-            int temp_x, temp_y;
+            Item coin = new Item(id: 1, name: "Гривня", description: "", maxStack: 99, model: '@', color: ConsoleColor.DarkMagenta);
+            coin.Render(new Vector(6+intend, 5 + intend));
 
-            EntityMap[x, y] = PlayerSturct.IntModel;
 
-            
-            new PlayerSturct(x + intend, y + intend, PlayerColor).Draw();
+            ItemMap.Add(new Vector(6 + intend, 5 + intend), coin);
 
-            while(true)
+            int x, y;
+
+            EntityObject player = new EntityObject(model: 'I', ConsoleColor.Green, name: "Игрок", id: 1, vector: new Vector(2,5));
+
+            EntityMap2[2,5] = player;
+
+            player.Draw(new Vector(2 + intend, 5 + intend));
+
+            while (true)
             {
+                
+                x = player.Vector.x ;
+                y = player.Vector.y ;
+                EntityMap2[x, y] = null;
+
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+                player.Clear(new Vector(x + intend, y + intend));
+                
+
                 switch (keyInfo.Key)
                 {
-                    
                     case ConsoleKey.UpArrow:
-                        if (EntityLogic.Colission(map, Map.Wall.IntModel, x, y - 1) && !EntityLogic.Colission(map, Map.Lader.IntModel, x, y))
+                        if (!EntityLogic.Colission(EntityMap2, MapObjecstMap, x, y - 1) && MapObjecstMap[x, y - 1] != null && y > 0)
                         {
-                            EntityMap = EntityLogic.MapSwap(map, EntityMap, x, y, x, y-1);
-                            y--;
+                            if (MapObjecstMap[x, y-1].Name == "Lader")
+                            {
+                                MapObjecstMap[x, y].Draw(new Vector(x + intend, y + intend));
+                                y--;
+                            }
                         }
                         break;
                     case ConsoleKey.DownArrow:
-                        if (EntityLogic.Colission(map, Map.Wall.IntModel, x, y + 1) && !EntityLogic.Colission(map, Map.Lader.IntModel, x, y))
+                        if (!EntityLogic.Colission(EntityMap2, MapObjecstMap, x, y+1) && MapObjecstMap[x, y + 1] != null && y < WIDTH-1)
                         {
-                            EntityMap = EntityLogic.MapSwap(map, EntityMap, x, y, x, y + 1);
-                            y++;
+                            if (MapObjecstMap[x, y + 1].Name == "Lader")
+                            {
+                                MapObjecstMap[x, y].Draw(new Vector(x+intend, y+intend));
+                                y++;
+                            }
+                            if (ItemMap[new Vector(x,y)] == coin)
+                            {
+
+                            }
                         }
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        if (x > 0 && EntityLogic.Colission(map, Map.Wall.IntModel, x - 1, y))
-                        {
-                            EntityMap = EntityLogic.MapSwap(map, EntityMap, x, y, x-1, y);
-                            x--;
-                        }
-                        break;
+                        break; 
                     case ConsoleKey.RightArrow:
-                        if (x < WIDTH - 1 && EntityLogic.Colission(map, Map.Wall.IntModel, x + 1, y))
+                        if (x < WIDTH - 1 && !EntityLogic.ColissionWithObject(player, MapObjecstMap, "Wall", x +1,y) )
                         {
-                            EntityMap = EntityLogic.MapSwap(map, EntityMap, x, y, x+1, y);
+                            if (MapObjecstMap[x, y] != null)
+                            {
+                                MapObjecstMap[x, y].Draw(new Vector(x + intend, y + intend));
+                            }
+                            
                             x++;
                         }
                         break;
-                }
-                if (!EntityLogic.Colission(map, x, y + 1))
-                {
-                    temp_x = x; temp_y = y;
-                    while (!EntityLogic.Colission(map, x, y + 1))
-                    {
-                        y++;
-                    }
-                    EntityMap = EntityLogic.MapSwap(map, EntityMap, temp_x, temp_y, x, y);
-                }
-                
+                    case ConsoleKey.LeftArrow:
+                        if (x > 0 && !EntityLogic.ColissionWithObject(player, MapObjecstMap, "Wall", x-1,y) )
+                        {
+                            if (MapObjecstMap[x, y] != null)
+                            {
+                                MapObjecstMap[x, y].Draw(new Vector(x + intend, y + intend));
+                            }
 
-                Map.Generator.CharRender(EntityMap, intend, intend);
+                            x--;
+                        }
+                        break;
+                };
+                
+                if (!EntityLogic.Colission(EntityMap2, MapObjecstMap, x, y + 1))
+                {
+                    int yy = y;
+                    while (MapObjecstMap[x,yy+1] == null)
+                    {
+                        yy++;
+                    }
+                    y = yy;
+                }  
+
+                EntityMap2[x, y] = player;
+                player.Draw(new Vector(x + intend,y + intend));
+                player.Vector = new Vector(x,y);
+
+
             }
-            
+            Console.ReadLine();
         }
 
     }

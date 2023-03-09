@@ -1,4 +1,4 @@
-﻿using LudeRunnerCH.GameLogic.Player.Inventory;
+﻿using LudeRunnerCH.Entity.Player.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace LudeRunnerCH.GUI
     public class GUIinventory
     {
 
-        public GameLogic.Player.Inventory.PInventory inventory { get; set; }
+        public PInventory inventory { get; set; }
         public int start_x { get; set; }
         public int start_y {  get; set; }
         public int cell_width { get; set; }
