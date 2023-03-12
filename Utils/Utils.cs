@@ -19,4 +19,17 @@ namespace LudeRunnerCH.Utils
 
     }
 
+    public struct AnyVector <TFirst, TSecond>
+    {
+        public TFirst First { get; set; }
+        public TSecond Second { get; set; }
+
+        public AnyVector(TFirst first, TSecond second)
+        {
+            this.First = first;
+            this.Second = second;   
+        }
+
+    }
+
 }
